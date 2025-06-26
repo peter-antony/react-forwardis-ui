@@ -243,7 +243,7 @@ export function FilterSystem({
   const subRowFilterCount = Object.keys(activeFilters).filter(key => key.startsWith('subrow-')).length;
 
   return (
-    <div className="space-y-2">
+    <div className="">
       {/* Filter Controls */}
       <div className="flex items-center justify-between bg-gray-50 p-2 rounded border">
         <div className="flex items-center space-x-2">

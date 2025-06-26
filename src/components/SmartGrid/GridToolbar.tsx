@@ -82,7 +82,7 @@ export function GridToolbar({
     : (showDefaultConfigurableButton ? [defaultConfigurableButton] : []);
 
   return (
-    <div className="flex items-center justify-between w-full py-2 bg-gray-50">
+    <div className="flex items-center justify-between w-full py-1 mb-4 bg-gray-50">
       {/* Left side - Grid Title and Count */}
       <div className="flex items-center">
         {gridTitle && (

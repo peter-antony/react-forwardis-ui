@@ -701,7 +701,7 @@ export function SmartGrid({
       />
 
        {/* Advanced Filter System */}
-      <FilterSystem
+      {/* <FilterSystem
         columns={orderedColumns}
         subRowColumns={subRowColumns}
         showFilterRow={showFilterRow}
@@ -710,13 +710,13 @@ export function SmartGrid({
         gridId="smart-grid"
         userId="demo-user"
         api={mockFilterAPI}
-      />
+      /> */}
       
       {/* Table Container with no horizontal scroll */}
-      <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+      <div className="bg-white shadow-sm overflow-hidden m-0">
         <div className="w-full">
           <Table className="w-full table-fixed">
-            <TableHeader className="sticky top-0 z-20 bg-white shadow-sm border-b-2 border-gray-100">
+            <TableHeader className="sticky top-0 bg-white shadow-sm border-b-2 border-gray-100">
               <TableRow className="hover:bg-transparent">
                 {/* Checkbox header */}
                 {showCheckboxes && (
@@ -743,7 +743,7 @@ export function SmartGrid({
                     <TableHead 
                       key={column.key}
                       className={cn(
-                        "relative group bg-gray-50/80 backdrop-blur-sm font-semibold text-gray-900 px-2 py-3 border-r border-gray-100 last:border-r-0",
+                        "relative group bg-gray-100 backdrop-blur-sm font-semibold text-gray-900 px-2 py-3 border-r border-gray-100 last:border-r-0",
                         draggedColumn === column.key && "opacity-50",
                         dragOverColumn === column.key && "bg-blue-100 border-blue-300",
                         resizingColumn === column.key && "bg-blue-50",
@@ -782,7 +782,7 @@ export function SmartGrid({
                           ) : (
                             <div 
                               className={cn(
-                                "flex items-center gap-1 rounded px-1 py-0.5 -mx-1 -my-0.5 transition-colors group/header flex-1 min-w-0",
+                                "flex items-center gap-1 rounded text-gray-600 px-1 py-0.5 -mx-1 -my-0.5 transition-colors group/header flex-1 min-w-0",
                                 !resizingColumn && "cursor-pointer hover:bg-gray-100/50"
                               )}
                               onClick={(e) => {
@@ -793,7 +793,7 @@ export function SmartGrid({
                               onDragStart={(e) => e.preventDefault()}
                             >
                               <span 
-                                className="select-none text-sm font-semibold flex-1 min-w-0" 
+                                className="select-none text-[14px] font-semibold flex-1 min-w-0" 
                                 style={{ 
                                   whiteSpace: 'nowrap',
                                   overflow: 'visible',
@@ -961,7 +961,7 @@ export function SmartGrid({
                       {orderedColumns.map((column, columnIndex) => (
                         <TableCell 
                           key={column.key} 
-                          className="relative px-3 py-3 border-r border-gray-50 last:border-r-0 align-top overflow-hidden"
+                          className="relative px-3 py-3 border-r border-gray-50 last:border-r-0 overflow-hidden"
                           style={{ width: `${column.width}px` }}
                         >
                           {renderCell(row, column, rowIndex, columnIndex)}
@@ -989,7 +989,7 @@ export function SmartGrid({
                           className="p-0 border-b border-gray-200"
                         >
                           <div className="bg-gradient-to-r from-gray-50/50 to-white border-l-4 border-blue-500">
-                            <div className="p-6 pl-12">
+                            <div className="">
                               {effectiveNestedRowRenderer(row, rowIndex)}
                             </div>
                           </div>

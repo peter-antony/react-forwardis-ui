@@ -12,14 +12,15 @@ import { AppLayout } from '@/components/AppLayout';
 
 interface SampleData {
   id: string;
+  quickOrderDate: string;
+  customerSub: string;
   status: string;
   tripBillingStatus: string;
-  plannedStartEndDateTime: string;
-  actualStartEndDateTime: string;
-  departurePoint: string;
-  arrivalPoint: string;
+  customerSubRefNo: string;
+  contract: string;
   customer: string;
-  resources: string;
+  orderType: string;
+  totalNet: string
   departurePointDetails?: string;
   arrivalPointDetails?: string;
   customerDetails?: Array<{
@@ -41,11 +42,19 @@ const QuickOrderManagement = () => {
   const initialColumns: GridColumnConfig[] = [
     {
       key: 'id',
-      label: 'Trip Plan No',
+      label: 'Quick Order No.',
       type: 'Link',
       sortable: true,
       editable: false,
       mandatory: true,
+      subRow: false
+    },
+    {
+      key: 'quickOrderDate',
+      label: 'Quick Order Date',
+      type: 'DateTimeRange',
+      sortable: true,
+      editable: false,
       subRow: false
     },
     {
@@ -57,102 +66,165 @@ const QuickOrderManagement = () => {
       subRow: false
     },
     {
-      key: 'tripBillingStatus',
-      label: 'Trip Billing Status',
-      type: 'Badge',
+      key: 'customerSub',
+      label: 'Customer/Supplier',
+      type: 'EditableText',
+      sortable: true,
+      editable: false,
+      subRow: false
+    },    
+    {
+      key: 'customerSubRefNo',
+      label: 'Cust/Sup.Ref.No.',
+      type: 'Text',
+      // type: 'TextWithTooltip',
       sortable: true,
       editable: false,
       subRow: false
     },
     {
-      key: 'plannedStartEndDateTime',
-      label: 'Planned Start and End Date Time',
-      type: 'EditableText',
-      sortable: true,
-      editable: true,
-      subRow: true
-    },
-    {
-      key: 'actualStartEndDateTime',
-      label: 'Actual Start and End Date Time',
-      type: 'DateTimeRange',
+      key: 'contract',
+      label: 'Contract',
+      type: 'Text',
       sortable: true,
       editable: false,
-      subRow: true
+      // infoTextField: 'arrivalPointDetails',
+      subRow: false
     },
     {
-      key: 'departurePoint',
-      label: 'Departure Point',
-      type: 'TextWithTooltip',
+      key: 'orderType',
+      label: 'Order Type',
+      type: 'Text',
       sortable: true,
       editable: false,
-      infoTextField: 'departurePointDetails',
-      subRow: true
+      subRow: false
     },
     {
-      key: 'arrivalPoint',
-      label: 'Arrival Point',
-      type: 'TextWithTooltip',
+      key: 'totalNet',
+      label: 'Total Net',
+      type: 'Text',
       sortable: true,
       editable: false,
-      infoTextField: 'arrivalPointDetails',
-      subRow: true
+      subRow: false
     },
-    {
-      key: 'customer',
-      label: 'Customer',
-      type: 'ExpandableCount',
-      sortable: true,
-      editable: false,
-      renderExpandedContent: (row: SampleData) => (
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-4">
-            <User className="h-4 w-4" />
-            Customer Details
-          </div>
-          {row.customerDetails?.map((customer, index) => (
-            <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                <User className="h-4 w-4 text-blue-600" />
-              </div>
-              <div>
-                <div className="font-medium text-gray-900">{customer.name}</div>
-                <div className="text-sm text-gray-500">{customer.id}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )
-    },
-    {
-      key: 'resources',
-      label: 'Resources',
-      type: 'ExpandableCount',
-      sortable: true,
-      editable: false,
-      renderExpandedContent: (row: SampleData) => (
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-4">
-            <Container className="h-4 w-4" />
-            Resource Details
-          </div>
-          {row.resourceDetails?.map((resource, index) => (
-            <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                {resource.type === 'train' && <Train className="h-4 w-4 text-green-600" />}
-                {resource.type === 'agent' && <UserCheck className="h-4 w-4 text-green-600" />}
-                {resource.type === 'container' && <Container className="h-4 w-4 text-green-600" />}
-              </div>
-              <div>
-                <div className="font-medium text-gray-900">{resource.name}</div>
-                <div className="text-sm text-gray-500">{resource.id}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )
-    }
+    
   ];
+
+  // const initialColumns: GridColumnConfig[] = [
+  //   {
+  //     key: 'id',
+  //     label: 'Trip Plan No',
+  //     type: 'Link',
+  //     sortable: true,
+  //     editable: false,
+  //     mandatory: true,
+  //     subRow: false
+  //   },
+  //   {
+  //     key: 'status',
+  //     label: 'Status',
+  //     type: 'Badge',
+  //     sortable: true,
+  //     editable: false,
+  //     subRow: false
+  //   },
+  //   {
+  //     key: 'tripBillingStatus',
+  //     label: 'Trip Billing Status',
+  //     type: 'Badge',
+  //     sortable: true,
+  //     editable: false,
+  //     subRow: false
+  //   },
+  //   {
+  //     key: 'plannedStartEndDateTime',
+  //     label: 'Planned Start and End Date Time',
+  //     type: 'EditableText',
+  //     sortable: true,
+  //     editable: false,
+  //     subRow: false
+  //   },
+  //   {
+  //     key: 'actualStartEndDateTime',
+  //     label: 'Actual Start and End Date Time',
+  //     type: 'DateTimeRange',
+  //     sortable: true,
+  //     editable: false,
+  //     subRow: false
+  //   },
+  //   {
+  //     key: 'departurePoint',
+  //     label: 'Departure Point',
+  //     type: 'TextWithTooltip',
+  //     sortable: true,
+  //     editable: false,
+  //     infoTextField: 'departurePointDetails',
+  //     subRow: true
+  //   },
+  //   {
+  //     key: 'arrivalPoint',
+  //     label: 'Arrival Point',
+  //     type: 'TextWithTooltip',
+  //     sortable: true,
+  //     editable: false,
+  //     infoTextField: 'arrivalPointDetails',
+  //     subRow: true
+  //   },
+  //   {
+  //     key: 'customer',
+  //     label: 'Customer',
+  //     type: 'ExpandableCount',
+  //     sortable: true,
+  //     editable: false,
+  //     renderExpandedContent: (row: SampleData) => (
+  //       <div className="space-y-3">
+  //         <div className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-4">
+  //           <User className="h-4 w-4" />
+  //           Customer Details
+  //         </div>
+  //         {row.customerDetails?.map((customer, index) => (
+  //           <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+  //             <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+  //               <User className="h-4 w-4 text-blue-600" />
+  //             </div>
+  //             <div>
+  //               <div className="font-medium text-gray-900">{customer.name}</div>
+  //               <div className="text-sm text-gray-500">{customer.id}</div>
+  //             </div>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     )
+  //   },
+  //   {
+  //     key: 'resources',
+  //     label: 'Resources',
+  //     type: 'ExpandableCount',
+  //     sortable: true,
+  //     editable: false,
+  //     renderExpandedContent: (row: SampleData) => (
+  //       <div className="space-y-3">
+  //         <div className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-4">
+  //           <Container className="h-4 w-4" />
+  //           Resource Details
+  //         </div>
+  //         {row.resourceDetails?.map((resource, index) => (
+  //           <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+  //             <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+  //               {resource.type === 'train' && <Train className="h-4 w-4 text-green-600" />}
+  //               {resource.type === 'agent' && <UserCheck className="h-4 w-4 text-green-600" />}
+  //               {resource.type === 'container' && <Container className="h-4 w-4 text-green-600" />}
+  //             </div>
+  //             <div>
+  //               <div className="font-medium text-gray-900">{resource.name}</div>
+  //               <div className="text-sm text-gray-500">{resource.id}</div>
+  //             </div>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     )
+  //   }
+  // ];
 
   // Initialize columns and data in the grid state
   useEffect(() => {
@@ -177,15 +249,16 @@ const QuickOrderManagement = () => {
 
   const sampleData: SampleData[] = [
     {
-      id: 'TRIP00000001',
+      id: 'QQ/0001/2025',
       status: 'Released',
       tripBillingStatus: 'Draft Bill Raised',
-      plannedStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      actualStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      departurePoint: 'VLA-70',
-      arrivalPoint: 'CUR-25',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
       customer: '+3',
-      resources: '+3',
+      orderType: 'Buy',
+      totalNet: '$1395.00',
       departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
       arrivalPointDetails: 'Currency details for CUR-25',
       customerDetails: [
@@ -200,15 +273,16 @@ const QuickOrderManagement = () => {
       ]
     },
     {
-      id: 'TRIP00000002',
+      id: 'QQ/0001/2026',
       status: 'Under Execution',
       tripBillingStatus: 'Not Eligible',
-      plannedStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      actualStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      departurePoint: 'VLA-70',
-      arrivalPoint: 'CUR-25',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
       customer: '+3',
-      resources: '+3',
+      orderType: 'Sell',
+      totalNet: '$1395.00',
       departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
       arrivalPointDetails: 'Currency details for CUR-25',
       customerDetails: [
@@ -223,15 +297,16 @@ const QuickOrderManagement = () => {
       ]
     },
     {
-      id: 'TRIP00000003',
+      id: 'QQ/0001/2027',
       status: 'Initiated',
       tripBillingStatus: 'Revenue Leakage',
-      plannedStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      actualStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      departurePoint: 'VLA-70',
-      arrivalPoint: 'CUR-25',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
       customer: '+3',
-      resources: '+3',
+      orderType: 'Buy',
+      totalNet: '$1395.00',
       departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
       arrivalPointDetails: 'Currency details for CUR-25',
       customerDetails: [
@@ -246,15 +321,16 @@ const QuickOrderManagement = () => {
       ]
     },
     {
-      id: 'TRIP00000004',
+      id: 'QQ/0001/2028',
       status: 'Cancelled',
       tripBillingStatus: 'Invoice Created',
-      plannedStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      actualStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      departurePoint: 'VLA-70',
-      arrivalPoint: 'CUR-25',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
       customer: '+3',
-      resources: '+3',
+      orderType: 'Sell',
+      totalNet: '$1395.00',
       departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
       arrivalPointDetails: 'Currency details for CUR-25',
       customerDetails: [
@@ -269,15 +345,16 @@ const QuickOrderManagement = () => {
       ]
     },
     {
-      id: 'TRIP00000005',
+      id: 'QQ/0001/2029',
       status: 'Deleted',
       tripBillingStatus: 'Invoice Approved',
-      plannedStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      actualStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      departurePoint: 'VLA-70',
-      arrivalPoint: 'CUR-25',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
       customer: '+3',
-      resources: '+3',
+      orderType: 'Buy',
+      totalNet: '$1395.00',
       departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
       arrivalPointDetails: 'Currency details for CUR-25',
       customerDetails: [
@@ -292,15 +369,16 @@ const QuickOrderManagement = () => {
       ]
     },
     {
-      id: 'TRIP00000006',
+      id: 'QQ/0001/2030',
       status: 'Confirmed',
       tripBillingStatus: 'Not Eligible',
-      plannedStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      actualStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      departurePoint: 'VLA-70',
-      arrivalPoint: 'CUR-25',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
       customer: '+3',
-      resources: '+3',
+      orderType: 'Sell',
+      totalNet: '$1395.00',
       departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
       arrivalPointDetails: 'Currency details for CUR-25',
       customerDetails: [
@@ -315,15 +393,16 @@ const QuickOrderManagement = () => {
       ]
     },
     {
-      id: 'TRIP00000007',
+      id: 'QQ/0001/2031',
       status: 'Under Execution',
       tripBillingStatus: 'Revenue Leakage',
-      plannedStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      actualStartEndDateTime: '25-Mar-2025 11:22:34 PM\n27-Mar-2025 11:22:34 PM',
-      departurePoint: 'VLA-70',
-      arrivalPoint: 'CUR-25',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
       customer: '+3',
-      resources: '+3',
+      orderType: 'Buy',
+      totalNet: '$1395.00',
       departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
       arrivalPointDetails: 'Currency details for CUR-25',
       customerDetails: [
@@ -450,18 +529,18 @@ const QuickOrderManagement = () => {
   return (
     <AppLayout>
       <div className="min-h-screen bg-gray-50">
-        <div className="container mx-auto p-6 space-y-6">
+        <div className="container mx-auto p-4 px-6 space-y-6">
           <div className="hidden md:block">
             <Breadcrumb items={breadcrumbItems} />
           </div>
 
           {/* Grid Container */}
-          <div className="bg-white rounded-lg shadow-sm mt-4">
+          <div className="rounded-lg shadow-sm mt-4">
             <SmartGrid
               key={`grid-${gridState.forceUpdate}`}
               columns={gridState.columns}
               data={gridState.gridData.length > 0 ? gridState.gridData : processedData}
-              editableColumns={['plannedStartEndDateTime']}
+              editableColumns={['customerSub']}
               paginationMode="pagination"
               onLinkClick={handleLinkClick}
               onUpdate={handleUpdate}
