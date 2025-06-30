@@ -15,6 +15,7 @@ export interface ConfigurableButtonConfig {
   showDropdown: boolean;
   dropdownItems?: DropdownItem[];
   tooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
+  onClick?: () => void;
 }
 
 interface ConfigurableButtonProps {
@@ -56,7 +57,11 @@ export const ConfigurableButton: React.FC<ConfigurableButtonProps> = ({
     if (hasDropdown) {
       setShowDropdown(!showDropdown);
     } else {
-      onClick?.();
+      if (config.onClick) {
+        config.onClick();
+      } else {
+        onClick?.();
+      }
     }
   };
 

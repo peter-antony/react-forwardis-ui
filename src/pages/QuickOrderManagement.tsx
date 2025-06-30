@@ -9,6 +9,7 @@ import { DraggableSubRow } from '@/components/SmartGrid/DraggableSubRow';
 import { ConfigurableButtonConfig } from '@/components/ui/configurable-button';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { AppLayout } from '@/components/AppLayout';
+import { useNavigate } from 'react-router-dom';
 
 interface SampleData {
   id: string;
@@ -451,22 +452,21 @@ const QuickOrderManagement = () => {
       }
     }));
   }, []);
-
+  // Navigate to the create new quick order page
+  const navigate = useNavigate();
   // Configurable buttons for the grid toolbar
   const configurableButtons: ConfigurableButtonConfig[] = [
     {
-      label: "+ Create button",
-      tooltipTitle: "Create button",
+      label: "+ Create Quick Order",
+      tooltipTitle: "Create Quick Order",
       showDropdown: false,
       dropdownItems: [
         {
-          label: "Create Trip",
+          label: "Create Quick Order",
           icon: <Plus className="h-4 w-4" />,
           onClick: () => {
-            toast({
-              title: "Create Trip",
-              description: "Opening trip creation form..."
-            });
+            navigate('/create-new-quick-order');
+            
           }
         },
         {
@@ -556,6 +556,7 @@ const QuickOrderManagement = () => {
               gridTitle="Quick Order"
               recordCount={gridState.gridData.length > 0 ? gridState.gridData.length : processedData.length}
               showCreateButton={true}
+              createButtonLabel="Create New Quick Order"
               searchPlaceholder="Search all columns..."
             />
             

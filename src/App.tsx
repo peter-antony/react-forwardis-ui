@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound";
 import { ROUTES } from "./config/app.config";
 import Dashboard from "./pages/Dashboard";
 import QuickOrderManagement from "./pages/QuickOrderManagement";
-import DynamicPanelDemo from "./pages/DynamicPanelDemo";
+import DynamicPanelDemo from "./pages/CreateTripPlan";
 import TripPlansSearchHub from "./pages/TripPlansSearchHub";
 
 const queryClient = new QueryClient({
@@ -50,7 +50,7 @@ const App = () => {
                 <Route path="/quick-order" element={<QuickOrderManagement />} />
                 <Route path="/trip-execution" element={<TripExecutionManagement />} />
                 <Route path="/trip-plans-search-hub" element={<TripPlansSearchHub />} />
-                <Route path="/dynamic-panel-demo" element={<DynamicPanelDemo />} />
+                <Route path="/create-new-trip" element={<DynamicPanelDemo />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

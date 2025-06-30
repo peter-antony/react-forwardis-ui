@@ -50,6 +50,7 @@ export function SmartGrid({
   showDefaultConfigurableButton,
   defaultConfigurableButtonLabel,
   gridTitle,
+  createButtonLabel,
   recordCount
 }: SmartGridProps) {
   const {
@@ -697,11 +698,12 @@ export function SmartGrid({
         showDefaultConfigurableButton={showDefaultConfigurableButton}
         defaultConfigurableButtonLabel={defaultConfigurableButtonLabel}
         gridTitle={gridTitle}
+        createButtonLabel={createButtonLabel}
         recordCount={recordCount}
       />
 
        {/* Advanced Filter System */}
-      {/* <FilterSystem
+      <FilterSystem
         columns={orderedColumns}
         subRowColumns={subRowColumns}
         showFilterRow={showFilterRow}
@@ -710,7 +712,7 @@ export function SmartGrid({
         gridId="smart-grid"
         userId="demo-user"
         api={mockFilterAPI}
-      /> */}
+      />
       
       {/* Table Container with no horizontal scroll */}
       <div className="bg-white shadow-sm overflow-hidden m-0">

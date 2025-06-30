@@ -130,6 +130,7 @@ export interface SmartGridProps {
   recordCount?: number;
   showCreateButton?: boolean;
   searchPlaceholder?: string;
+  createButtonLabel?: string;
 }
 
 // Legacy interface for backward compatibility

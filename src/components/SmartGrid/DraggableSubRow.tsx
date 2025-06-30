@@ -206,8 +206,8 @@ export const DraggableSubRow: React.FC<DraggableSubRowProps> = ({
   }
 
   return (
-    <div className="bg-gray-50 p-4 border-t border-gray-200">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="bg-gray-50 py-3 px-2 border-t border-gray-200">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {orderedSubRowColumns.map((column) => {
           const value = row[column.key];
           const isDragged = draggedColumn === column.key;
@@ -217,7 +217,7 @@ export const DraggableSubRow: React.FC<DraggableSubRowProps> = ({
             <div
               key={column.key}
               className={cn(
-                "group relative p-3 bg-white rounded-lg border transition-all duration-200 ease-in-out cursor-move",
+                "group relative py-3 px-2 bg-white rounded-lg border transition-all duration-200 ease-in-out cursor-move",
                 isDragged && "opacity-50 scale-95 shadow-lg",
                 isDragOver && "bg-blue-100 border-blue-300 scale-105",
                 "hover:shadow-md"

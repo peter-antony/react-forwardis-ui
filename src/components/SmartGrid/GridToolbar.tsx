@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
   Search, 
-  Filter, 
+  Filter,
   RotateCcw, 
   Download, 
   CheckSquare,
@@ -41,6 +41,7 @@ interface GridToolbarProps {
   recordCount?: number;
   showCreateButton?: boolean;
   searchPlaceholder?: string;
+  createButtonLabel?: string;
 }
 
 export function GridToolbar({
@@ -67,13 +68,17 @@ export function GridToolbar({
   gridTitle,
   recordCount,
   showCreateButton = false,
+  createButtonLabel = "Create",
   searchPlaceholder = "Search"
 }: GridToolbarProps) {
   // Default configurable button configuration
   const defaultConfigurableButton: ConfigurableButtonConfig = {
     label: defaultConfigurableButtonLabel,
     tooltipTitle: "Add new item",
-    showDropdown: false
+    showDropdown: false,
+    onClick: () => {
+      defaultConfigurableButton.onClick();
+    }
   };
 
   // Determine which buttons to show
@@ -215,7 +220,7 @@ export function GridToolbar({
             className="border border-blue-500 text-blue-500 rounded-lg px-3 py-1 text-sm hover:bg-blue-50 h-8 ml-2"
           >
             <Plus className="h-4 w-4 mr-1" />
-            Create Trip
+            {createButtonLabel}
           </Button>
         )}
         
