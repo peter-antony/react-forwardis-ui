@@ -457,16 +457,18 @@ const QuickOrderManagement = () => {
   // Configurable buttons for the grid toolbar
   const configurableButtons: ConfigurableButtonConfig[] = [
     {
-      label: "+ Create Quick Order",
-      tooltipTitle: "Create Quick Order",
-      showDropdown: false,
+      label: "Create Order",
+      tooltipTitle: "Create new quick order",
+      showDropdown: true, // Enable dropdown for future functionality
+      onClick: () => {
+        navigate('/create-new-quick-order');
+      },
       dropdownItems: [
         {
           label: "Create Quick Order",
           icon: <Plus className="h-4 w-4" />,
           onClick: () => {
             navigate('/create-new-quick-order');
-            
           }
         },
         {

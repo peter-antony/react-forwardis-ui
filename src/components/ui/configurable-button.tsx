@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export interface DropdownItem {
@@ -90,21 +90,30 @@ export const ConfigurableButton: React.FC<ConfigurableButtonProps> = ({
       <button
         ref={buttonRef}
         className={cn(
-          "border border-blue-500 text-blue-500 hover:bg-blue-50 rounded px-3 py-1 flex items-center transition-colors duration-200",
+          "border border-blue-500 text-blue-500 hover:bg-blue-50 rounded-md px-3 py-2 flex items-center transition-colors duration-200 gap-2",
           className
         )}
         onClick={handleMainButtonClick}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       >
-        <span>{label}</span>
+        {/* Plus Icon */}
+        <Plus className="h-4 w-4" />
+        
+        {/* Button Text */}
+        <span className="text-sm font-medium">{label}</span>
+        
+        {/* Vertical Divider and Arrow for dropdown buttons */}
         {hasDropdown && (
-          <ChevronDown 
-            className={cn(
-              "h-4 w-4 ml-2 transition-transform duration-200",
-              showDropdown ? "rotate-180" : ""
-            )} 
-          />
+          <>
+            <div className="w-px h-4 bg-blue-500 mx-1" />
+            <ChevronDown 
+              className={cn(
+                "h-4 w-4 transition-transform duration-200",
+                showDropdown ? "rotate-180" : ""
+              )} 
+            />
+          </>
         )}
       </button>
 
@@ -132,11 +141,11 @@ export const ConfigurableButton: React.FC<ConfigurableButtonProps> = ({
 
       {/* Dropdown Menu */}
       {hasDropdown && showDropdown && dropdownItems && (
-        <div className="absolute right-0 mt-1 w-40 bg-white border rounded shadow z-50 transition-opacity duration-200">
+        <div className="absolute right-0 mt-1 w-48 bg-white border rounded-md shadow-lg z-50 transition-opacity duration-200">
           {dropdownItems.map((item, index) => (
             <button
               key={index}
-              className="w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center transition-colors duration-150 first:rounded-t last:rounded-b"
+              className="w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center transition-colors duration-150 first:rounded-t-md last:rounded-b-md"
               onClick={() => handleDropdownItemClick(item)}
             >
               {item.icon && <span className="mr-2">{item.icon}</span>}
