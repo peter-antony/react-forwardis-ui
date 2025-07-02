@@ -86,31 +86,21 @@ export const ConfigurableButton: React.FC<ConfigurableButtonProps> = ({
       <button
         ref={buttonRef}
         className={cn(
-<<<<<<< HEAD
           "border border-blue-500 text-blue-500 hover:bg-blue-50 h-8 rounded px-3 flex items-center transition-colors duration-200 gap-2",
-=======
-          "border border-blue-500 text-blue-500 hover:bg-blue-50 rounded-md px-3 py-2 flex items-center transition-colors duration-200 gap-2",
->>>>>>> 602e1036d2196b1e9465e5267a8db1de72647921
           className
         )}
         onClick={handleMainButtonClick}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       >
-<<<<<<< HEAD
        {/* Plus Icon */}
        <Plus className="h-4 w-4" />
-=======
-        {/* Plus Icon */}
-        <Plus className="h-4 w-4" />
->>>>>>> 602e1036d2196b1e9465e5267a8db1de72647921
         
         {/* Button Text */}
         <span className="text-sm font-medium">{label}</span>
         
         {/* Vertical Divider and Arrow for dropdown buttons */}
         {hasDropdown && (
-<<<<<<< HEAD
            <>
            <div className="w-px h-8 bg-blue-500 ml-2 mr-1" />
            <ChevronDown 
@@ -120,17 +110,6 @@ export const ConfigurableButton: React.FC<ConfigurableButtonProps> = ({
              )} 
            />
          </>
-=======
-          <>
-            <div className="w-px h-4 bg-blue-500 mx-1" />
-            <ChevronDown 
-              className={cn(
-                "h-4 w-4 transition-transform duration-200",
-                showDropdown ? "rotate-180" : ""
-              )} 
-            />
-          </>
->>>>>>> 602e1036d2196b1e9465e5267a8db1de72647921
         )}
       </button>
 
