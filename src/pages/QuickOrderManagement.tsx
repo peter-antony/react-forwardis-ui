@@ -416,6 +416,174 @@ const QuickOrderManagement = () => {
         { name: 'AGN01', id: 'Agent-0000001', type: 'agent' },
         { name: '20FT CT', id: '20 Feet Container', type: 'container' }
       ]
+    },
+    {
+      id: 'QQ/0001/2033',
+      status: 'Released',
+      tripBillingStatus: 'Draft Bill Raised',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
+      customer: '+3',
+      orderType: 'Buy',
+      totalNet: '$1395.00',
+      departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
+      arrivalPointDetails: 'Currency details for CUR-25',
+      customerDetails: [
+        { name: 'DB Cargo', id: 'CUS00000123', type: 'customer' },
+        { name: 'ABC Rail Goods', id: 'CUS00003214', type: 'customer' },
+        { name: 'Wave Cargo', id: 'CUS00012345', type: 'customer' }
+      ],
+      resourceDetails: [
+        { name: 'Train ID', id: 'TR000213', type: 'train' },
+        { name: 'AGN01', id: 'Agent-0000001', type: 'agent' },
+        { name: '20FT CT', id: '20 Feet Container', type: 'container' }
+      ]
+    },
+    {
+      id: 'QQ/0001/2034',
+      status: 'Under Execution',
+      tripBillingStatus: 'Not Eligible',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
+      customer: '+3',
+      orderType: 'Sell',
+      totalNet: '$1395.00',
+      departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
+      arrivalPointDetails: 'Currency details for CUR-25',
+      customerDetails: [
+        { name: 'DB Cargo', id: 'CUS00000123', type: 'customer' },
+        { name: 'ABC Rail Goods', id: 'CUS00003214', type: 'customer' },
+        { name: 'Wave Cargo', id: 'CUS00012345', type: 'customer' }
+      ],
+      resourceDetails: [
+        { name: 'Train ID', id: 'TR000213', type: 'train' },
+        { name: 'AGN01', id: 'Agent-0000001', type: 'agent' },
+        { name: '20FT CT', id: '20 Feet Container', type: 'container' }
+      ]
+    },
+    {
+      id: 'QQ/0001/2035',
+      status: 'Initiated',
+      tripBillingStatus: 'Revenue Leakage',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
+      customer: '+3',
+      orderType: 'Buy',
+      totalNet: '$1395.00',
+      departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
+      arrivalPointDetails: 'Currency details for CUR-25',
+      customerDetails: [
+        { name: 'DB Cargo', id: 'CUS00000123', type: 'customer' },
+        { name: 'ABC Rail Goods', id: 'CUS00003214', type: 'customer' },
+        { name: 'Wave Cargo', id: 'CUS00012345', type: 'customer' }
+      ],
+      resourceDetails: [
+        { name: 'Train ID', id: 'TR000213', type: 'train' },
+        { name: 'AGN01', id: 'Agent-0000001', type: 'agent' },
+        { name: '20FT CT', id: '20 Feet Container', type: 'container' }
+      ]
+    },
+    {
+      id: 'QQ/0001/2036',
+      status: 'Cancelled',
+      tripBillingStatus: 'Invoice Created',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
+      customer: '+3',
+      orderType: 'Sell',
+      totalNet: '$1395.00',
+      departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
+      arrivalPointDetails: 'Currency details for CUR-25',
+      customerDetails: [
+        { name: 'DB Cargo', id: 'CUS00000123', type: 'customer' },
+        { name: 'ABC Rail Goods', id: 'CUS00003214', type: 'customer' },
+        { name: 'Wave Cargo', id: 'CUS00012345', type: 'customer' }
+      ],
+      resourceDetails: [
+        { name: 'Train ID', id: 'TR000213', type: 'train' },
+        { name: 'AGN01', id: 'Agent-0000001', type: 'agent' },
+        { name: '20FT CT', id: '20 Feet Container', type: 'container' }
+      ]
+    },
+    {
+      id: 'QQ/0001/2037',
+      status: 'Deleted',
+      tripBillingStatus: 'Invoice Approved',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
+      customer: '+3',
+      orderType: 'Buy',
+      totalNet: '$1395.00',
+      departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
+      arrivalPointDetails: 'Currency details for CUR-25',
+      customerDetails: [
+        { name: 'DB Cargo', id: 'CUS00000123', type: 'customer' },
+        { name: 'ABC Rail Goods', id: 'CUS00003214', type: 'customer' },
+        { name: 'Wave Cargo', id: 'CUS00012345', type: 'customer' }
+      ],
+      resourceDetails: [
+        { name: 'Train ID', id: 'TR000213', type: 'train' },
+        { name: 'AGN01', id: 'Agent-0000001', type: 'agent' },
+        { name: '20FT CT', id: '20 Feet Container', type: 'container' }
+      ]
+    },
+    {
+      id: 'WW/0001/2038',
+      status: 'Confirmed',
+      tripBillingStatus: 'Not Eligible',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
+      customer: '+3',
+      orderType: 'Sell',
+      totalNet: '$1395.00',
+      departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
+      arrivalPointDetails: 'Currency details for CUR-25',
+      customerDetails: [
+        { name: 'DB Cargo', id: 'CUS00000123', type: 'customer' },
+        { name: 'ABC Rail Goods', id: 'CUS00003214', type: 'customer' },
+        { name: 'Wave Cargo', id: 'CUS00012345', type: 'customer' }
+      ],
+      resourceDetails: [
+        { name: 'Train ID', id: 'TR000213', type: 'train' },
+        { name: 'AGN01', id: 'Agent-0000001', type: 'agent' },
+        { name: '20FT CT', id: '20 Feet Container', type: 'container' }
+      ]
+    },
+    {
+      id: 'WW/0001/2039',
+      status: 'Under Execution',
+      tripBillingStatus: 'Revenue Leakage',
+      customerSub: 'Oitis Group',
+      quickOrderDate: '25-Mar-2025',
+      customerSubRefNo: 'CSR/111/2024',
+      contract: 'AO Intertrans',
+      customer: '+3',
+      orderType: 'Buy',
+      totalNet: '$1395.00',
+      departurePointDetails: 'VQL-705\nVolla\n\nAddress\nSardar Patel Rd, Sriram Nagar, Tharamani, Chennai, Tamil Nadu 600113',
+      arrivalPointDetails: 'Currency details for CUR-25',
+      customerDetails: [
+        { name: 'DB Cargo', id: 'CUS00000123', type: 'customer' },
+        { name: 'ABC Rail Goods', id: 'CUS00003214', type: 'customer' },
+        { name: 'Wave Cargo', id: 'CUS00012345', type: 'customer' }
+      ],
+      resourceDetails: [
+        { name: 'Train ID', id: 'TR000213', type: 'train' },
+        { name: 'AGN01', id: 'Agent-0000001', type: 'agent' },
+        { name: '20FT CT', id: '20 Feet Container', type: 'container' }
+      ]
     }
   ];
 
@@ -457,9 +625,12 @@ const QuickOrderManagement = () => {
   // Configurable buttons for the grid toolbar
   const configurableButtons: ConfigurableButtonConfig[] = [
     {
-      label: "+ Create Quick Order",
-      tooltipTitle: "Create Quick Order",
-      showDropdown: false,
+      label: "Create Order",
+      tooltipTitle: "Create new quick order",
+      showDropdown: true, // Enable dropdown for future functionality
+      onClick: () => {
+        navigate('/create-new-quick-order');
+      },
       dropdownItems: [
         {
           label: "Create Quick Order",

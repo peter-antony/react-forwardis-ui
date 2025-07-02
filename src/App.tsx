@@ -45,12 +45,14 @@ const App = () => {
             <Sonner />
             <BrowserRouter>
               <Routes>
+                <Route path="" element={<QuickOrderManagement />} />
                 <Route path={ROUTES.HOME} element={<QuickOrderManagement />} />
                 {/* <Route path={ROUTES.DASHBOARD} element={<Dashboard />} /> */}
                 <Route path="/quick-order" element={<QuickOrderManagement />} />
                 <Route path="/trip-execution" element={<TripExecutionManagement />} />
                 <Route path="/trip-plans-search-hub" element={<TripPlansSearchHub />} />
                 <Route path="/create-new-trip" element={<DynamicPanelDemo />} />
+                <Route path="/create-new-quick-order" element={<DynamicPanelDemo />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

@@ -277,9 +277,9 @@ const TripPlansSearchHub = () => {
   // Configurable buttons for the grid toolbar
   const configurableButtons: ConfigurableButtonConfig[] = [
     {
-      label: "+ Create Trip",
+      label: "Create Trip",
       tooltipTitle: "Create Trip",
-      showDropdown: false,
+      showDropdown: true,
       onClick: () => {
         navigate('/create-new-trip');
       },

@@ -8,13 +8,20 @@ interface AppSidebarProps {
 }
 
 export const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed = false }) => {
+  // const menuItems = [
+  //   { icon: Home, label: 'Home', active: true, path: '/quick-order' },
+  //   { icon: Package, label: 'Inventory', active: false, path: '/quick-order' },
+  //   // { icon: IdCard, label: 'Quick Billing', active: false, path: '/quick-billing' },
+  //   { icon: MapPinned, label: 'Route Management', active: false, path: '/trip-plans-search-hub' },
+  //   { icon: Truck, label: 'Fleet Management', active: false, path: '/dynamic-panel-demo' },
+  //   // { icon: Fence, label: 'Panel', active: false, path: '/dynamic-panel' },
+  // ];
+
   const menuItems = [
-    { icon: Home, label: 'Home', active: true, path: '/quick-order' },
-    { icon: Package, label: 'Inventory', active: false, path: '/quick-order' },
-    // { icon: IdCard, label: 'Quick Billing', active: false, path: '/quick-billing' },
-    { icon: MapPinned, label: 'Route Management', active: false, path: '/trip-plans-search-hub' },
-    { icon: Truck, label: 'Fleet Management', active: false, path: '/dynamic-panel-demo' },
-    // { icon: Fence, label: 'Panel', active: false, path: '/dynamic-panel' },
+    { icon: Home, label: 'Home', path: '/' },
+    { icon: Package, label: 'Inventory', path: '/quick-order' },
+    { icon: MapPinned, label: 'Route Management', path: '/trip-plans-search-hub' },
+    { icon: Truck, label: 'Fleet Management', path: '/create-new-trip' },
   ];
 
   return (
@@ -27,18 +34,18 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed = false }) => 
       
       {/* Menu Items */}
       <div className="flex flex-col space-y-3 flex-1">
-        {menuItems.map((item, index) => (
-          <NavLink
-            key={index} to={item.path}
-            className={({ isActive }) =>
-              `w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
-                isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
-              }`
-            }
-          >
-            <item.icon size={20} />
-          </NavLink>
-        ))}
+      {menuItems.map((item, index) => (
+        <NavLink
+          key={index}
+          to={item.path} end={item.path === '/'}
+          className={({ isActive }) =>
+            `w-10 h-10 rounded-lg flex items-center justify-center transition-colors 
+            ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`
+          }
+        >
+          <item.icon size={20} />
+        </NavLink>
+      ))}
       </div>
       
       {/* Bottom Icons */}

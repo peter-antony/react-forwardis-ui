@@ -36,6 +36,12 @@ body{
 .mt-4 {
   margin-top: 1rem !important;
 }
+.m-0{
+  margin: 0px !important;
+}
+.justify-end{
+  justify-content: flex-end;
+}
 .text-sm{
     font-size: 13px;
 }
