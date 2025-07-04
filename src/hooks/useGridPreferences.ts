@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useEffect } from 'react';
 import { GridPreferences, Column } from '@/types/smartGrid';
 
@@ -14,8 +13,11 @@ export function useGridPreferences<T>(
     hiddenColumns: [],
     columnWidths: {},
     columnHeaders: {},
-    subRowColumns: [], // Initialize empty sub-row columns array
-    subRowColumnOrder: [], // Initialize empty sub-row column order array
+    columnTitles: {}, // Added missing property
+    subRowColumns: [],
+    subRowColumnOrder: [],
+    sortBy: '', // Added missing property
+    sortDirection: 'asc', // Added missing property
     filters: []
   };
 
@@ -61,8 +63,11 @@ export function useGridPreferences<T>(
             ...loadedPreferences.columnOrder.filter(id => columns.some(col => col.id === id)),
             ...columns.filter(col => !loadedPreferences.columnOrder.includes(col.id)).map(col => col.id)
           ],
-          subRowColumns: loadedPreferences.subRowColumns || [], // Ensure subRowColumns is initialized
-          subRowColumnOrder: loadedPreferences.subRowColumnOrder || [] // Ensure subRowColumnOrder is initialized
+          subRowColumns: loadedPreferences.subRowColumns || [],
+          subRowColumnOrder: loadedPreferences.subRowColumnOrder || [],
+          columnTitles: loadedPreferences.columnTitles || {}, // Ensure columnTitles is initialized
+          sortBy: loadedPreferences.sortBy || '', // Ensure sortBy is initialized
+          sortDirection: loadedPreferences.sortDirection || 'asc' // Ensure sortDirection is initialized
         };
         setPreferences(mergedPreferences);
       }
@@ -129,8 +134,8 @@ export function useGridPreferences<T>(
     toggleColumnVisibility,
     updateColumnWidth,
     updateColumnHeader,
-    toggleSubRow, // Function for toggling sub-row at column level
-    updateSubRowColumnOrder, // New function for updating sub-row column order
+    toggleSubRow,
+    updateSubRowColumnOrder,
     savePreferences
   };
 }

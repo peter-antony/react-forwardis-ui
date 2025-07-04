@@ -312,8 +312,11 @@ export function SmartGrid({
       hiddenColumns: [],
       columnWidths: {},
       columnHeaders: {},
+      columnTitles: {},
       subRowColumns: [],
-      subRowColumnOrder: [], // Reset sub-row column order
+      subRowColumnOrder: [],
+      sortBy: '',
+      sortDirection: 'asc' as const,
       filters: []
     };
     
