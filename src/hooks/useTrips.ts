@@ -104,10 +104,10 @@ export function useUpdateTrip() {
       // Snapshot previous value
       const previousTrip = queryClient.getQueryData(TRIP_QUERY_KEYS.detail(variables.id));
       
-      // Optimistically update
-      if (previousTrip) {
+      // Optimistically update - ensure we have valid data to spread
+      if (previousTrip && variables.data) {
         queryClient.setQueryData(TRIP_QUERY_KEYS.detail(variables.id), {
-          ...previousTrip,
+          ...previousTrip as Trip,
           ...variables.data,
           updatedAt: new Date().toISOString()
         });

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -76,12 +75,6 @@ export function QueryProvider({ children }: QueryProviderProps) {
         <ReactQueryDevtools 
           initialIsOpen={false} 
           position="bottom"
-          toggleButtonProps={{
-            style: {
-              marginRight: '20px',
-              marginBottom: '20px',
-            }
-          }}
         />
       )}
     </QueryClientProvider>
