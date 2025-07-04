@@ -117,7 +117,7 @@ export function useUpdateTrip() {
     },
     onError: (error, variables, context) => {
       // Rollback on error
-      if (context?.previousTrip) {
+      if (context && context.previousTrip) {
         queryClient.setQueryData(TRIP_QUERY_KEYS.detail(variables.id), context.previousTrip);
       }
       
