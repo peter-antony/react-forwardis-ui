@@ -1,5 +1,11 @@
-
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+
+// Extend Axios types to include metadata
+declare module 'axios' {
+  export interface InternalAxiosRequestConfig {
+    metadata?: { startTime: Date };
+  }
+}
 
 // API Configuration
 const API_CONFIG = {
@@ -42,7 +48,7 @@ apiClient.interceptors.request.use(
 // Response interceptor for error handling
 apiClient.interceptors.response.use(
   (response: AxiosResponse) => {
-    const duration = new Date().getTime() - response.config.metadata?.startTime?.getTime() || 0;
+    const duration = new Date().getTime() - (response.config.metadata?.startTime?.getTime() || 0);
     console.log('✅ API Response:', {
       method: response.config.method?.toUpperCase(),
       url: response.config.url,

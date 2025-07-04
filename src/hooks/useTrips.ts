@@ -18,19 +18,23 @@ export function useTrips(params: TripQueryParams = {}) {
   
   return useQuery({
     queryKey: TRIP_QUERY_KEYS.list(params),
-    queryFn: () => tripService.getTrips(params),
+    queryFn: async () => {
+      try {
+        return await tripService.getTrips(params);
+      } catch (error: any) {
+        console.error('Failed to fetch trips:', error);
+        toast({
+          title: "Error",
+          description: "Failed to load trips. Please try again.",
+          variant: "destructive"
+        });
+        throw error;
+      }
+    },
     staleTime: 5 * 60 * 1000, // 5 minutes
     refetchOnWindowFocus: true,
     refetchOnMount: true,
-    retry: 2,
-    onError: (error: any) => {
-      console.error('Failed to fetch trips:', error);
-      toast({
-        title: "Error",
-        description: "Failed to load trips. Please try again.",
-        variant: "destructive"
-      });
-    }
+    retry: 2
   });
 }
 
@@ -40,17 +44,21 @@ export function useTrip(id: string) {
   
   return useQuery({
     queryKey: TRIP_QUERY_KEYS.detail(id),
-    queryFn: () => tripService.getTrip(id),
+    queryFn: async () => {
+      try {
+        return await tripService.getTrip(id);
+      } catch (error: any) {
+        console.error('Failed to fetch trip:', error);
+        toast({
+          title: "Error",
+          description: "Failed to load trip details.",
+          variant: "destructive"
+        });
+        throw error;
+      }
+    },
     enabled: !!id,
-    staleTime: 5 * 60 * 1000,
-    onError: (error: any) => {
-      console.error('Failed to fetch trip:', error);
-      toast({
-        title: "Error",
-        description: "Failed to load trip details.",
-        variant: "destructive"
-      });
-    }
+    staleTime: 5 * 60 * 1000
   });
 }
 
@@ -87,20 +95,20 @@ export function useUpdateTrip() {
   const { toast } = useToast();
   
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<Trip> }) => 
-      tripService.updateTrip(id, data),
-    onMutate: async ({ id, data }) => {
+    mutationFn: (variables: { id: string; data: Partial<Trip> }) => 
+      tripService.updateTrip(variables.id, variables.data),
+    onMutate: async (variables) => {
       // Cancel outgoing refetches
-      await queryClient.cancelQueries({ queryKey: TRIP_QUERY_KEYS.detail(id) });
+      await queryClient.cancelQueries({ queryKey: TRIP_QUERY_KEYS.detail(variables.id) });
       
       // Snapshot previous value
-      const previousTrip = queryClient.getQueryData(TRIP_QUERY_KEYS.detail(id));
+      const previousTrip = queryClient.getQueryData(TRIP_QUERY_KEYS.detail(variables.id));
       
       // Optimistically update
       if (previousTrip) {
-        queryClient.setQueryData(TRIP_QUERY_KEYS.detail(id), {
+        queryClient.setQueryData(TRIP_QUERY_KEYS.detail(variables.id), {
           ...previousTrip,
-          ...data,
+          ...variables.data,
           updatedAt: new Date().toISOString()
         });
       }

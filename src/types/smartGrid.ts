@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ConfigurableButtonConfig } from '@/components/ui/configurable-button';
 
@@ -12,6 +11,18 @@ export type GridColumnType =
   | 'Date'                 // Formatted date
   | 'Dropdown'             // Selectable value from list (for edit or filter)
   | 'EditableText';        // Inline editable text
+
+export type FilterOperator = 
+  | 'equals' 
+  | 'contains' 
+  | 'startsWith' 
+  | 'endsWith' 
+  | 'gt' 
+  | 'lt' 
+  | 'gte' 
+  | 'lte'
+  | 'between'
+  | 'in';
 
 export interface GridColumnConfig {
   key: string;
@@ -82,7 +93,7 @@ export interface SortConfig {
 export interface FilterConfig {
   column: string;
   value: any;
-  operator?: 'equals' | 'contains' | 'startsWith' | 'endsWith' | 'gt' | 'lt' | 'gte' | 'lte';
+  operator: FilterOperator;
 }
 
 export interface GridPreferences {
