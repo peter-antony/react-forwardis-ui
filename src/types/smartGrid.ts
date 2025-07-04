@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ConfigurableButtonConfig } from '@/components/ui/configurable-button';
 
@@ -38,6 +39,23 @@ export interface GridColumnConfig {
   renderExpandedContent?: (rowData: any) => React.ReactNode;
 }
 
+// Updated GridColumn interface for compatibility
+export interface GridColumn<T = any> {
+  key: string;
+  title: string;
+  width?: number;
+  minWidth?: number;
+  maxWidth?: number;
+  sortable?: boolean;
+  filterable?: boolean;
+  editable?: boolean;
+  mandatory?: boolean;
+  type?: 'text' | 'number' | 'date' | 'boolean' | 'select';
+  options?: Array<{ label: string; value: any }>;
+  render?: (value: any, row: T) => React.ReactNode;
+  validator?: (value: any) => boolean | string;
+}
+
 // Legacy interfaces for backward compatibility
 export interface Column<T = any> {
   id: string;
@@ -72,10 +90,13 @@ export interface GridPreferences {
   hiddenColumns: string[];
   columnWidths: Record<string, number>;
   columnHeaders: Record<string, string>;
+  columnTitles: Record<string, string>; // Added missing property
   subRowColumns: string[]; // Existing property for tracking sub-row columns
   subRowColumnOrder: string[]; // New property for sub-row column ordering
   enableSubRowConfig?: boolean; // New property for enabling/disabling sub-row configuration
   sort?: SortConfig;
+  sortBy: string; // Added missing property
+  sortDirection: 'asc' | 'desc'; // Added missing property
   filters: FilterConfig[];
   pageSize?: number;
 }
@@ -108,6 +129,7 @@ export interface GridPlugin {
 export interface SmartGridProps {
   columns: GridColumnConfig[];
   data: any[];
+  loading?: boolean; // Added missing property
   editableColumns?: string[] | boolean;
   mandatoryColumns?: string[];
   onInlineEdit?(rowIndex: number, updatedRow: any): void;

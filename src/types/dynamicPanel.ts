@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 export interface FieldConfig {
   id: string;
   label: string;
@@ -27,7 +29,7 @@ export interface PanelSettings {
 export interface DynamicPanelProps {
   panelId: string;
   panelTitle: string;
-  panelIcon: React.ReactNode;
+  panelIcon?: React.ReactNode; // Made optional to fix the missing prop error
   panelConfig: PanelConfig;
   initialData?: Record<string, any>;
   onDataChange?: (updatedData: Record<string, any>) => void;
