@@ -5,15 +5,20 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ReduxProvider } from "./providers/ReduxProvider";
-import { ErrorBoundary } from "./components/molecules/ErrorBoundary/ErrorBoundary";
-import TripExecutionManagement from "./pages/TripExecutionManagement";
-import NotFound from "./pages/NotFound";
+import { ErrorBoundary } from "./components/ui/error-boundary";
+import { ThemeProvider } from "./components/ui/theme-provider";
+import { BaseLayout } from "./layouts/BaseLayout";
 import { ROUTES } from "./config/app.config";
-import Dashboard from "./pages/Dashboard";
-import QuickOrderManagement from "./pages/QuickOrderManagement";
-import DynamicPanelDemo from "./pages/CreateTripPlan";
-import TripPlansSearchHub from "./pages/TripPlansSearchHub";
-import CreateQuickOrder from "./pages/createQuickOrder";
+import NotFound from "./pages/NotFound";
+
+// Lazy load pages for better performance
+import { lazy, Suspense } from "react";
+
+const QuickOrderManagement = lazy(() => import("./pages/QuickOrderManagement"));
+const TripExecutionManagement = lazy(() => import("./pages/TripExecutionManagement"));
+const TripPlansSearchHub = lazy(() => import("./pages/TripPlansSearchHub"));
+const DynamicPanelDemo = lazy(() => import("./pages/CreateTripPlan"));
+const CreateQuickOrder = lazy(() => import("./pages/createQuickOrder"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,33 +39,69 @@ const queryClient = new QueryClient({
   },
 });
 
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+  </div>
+);
+
 const App = () => {
   console.log('🚀 App component initialized');
 
   return (
     <ErrorBoundary>
-      <ReduxProvider>
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="" element={<QuickOrderManagement />} />
-                <Route path={ROUTES.HOME} element={<QuickOrderManagement />} />
-                {/* <Route path={ROUTES.DASHBOARD} element={<Dashboard />} /> */}
-                <Route path="/quick-order" element={<QuickOrderManagement />} />
-                <Route path="/trip-execution" element={<TripExecutionManagement />} />
-                <Route path="/trip-plans-search-hub" element={<TripPlansSearchHub />} />
-                <Route path="/create-new-trip" element={<DynamicPanelDemo />} />
-                <Route path="/create-quick-order" element={<CreateQuickOrder />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </QueryClientProvider>
-      </ReduxProvider>
+      <ThemeProvider defaultTheme="light">
+        <ReduxProvider>
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<BaseLayout />}>
+                    <Route index element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <QuickOrderManagement />
+                      </Suspense>
+                    } />
+                    <Route path={ROUTES.HOME} element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <QuickOrderManagement />
+                      </Suspense>
+                    } />
+                    <Route path="/quick-order" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <QuickOrderManagement />
+                      </Suspense>
+                    } />
+                    <Route path="/trip-execution" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <TripExecutionManagement />
+                      </Suspense>
+                    } />
+                    <Route path="/trip-plans-search-hub" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <TripPlansSearchHub />
+                      </Suspense>
+                    } />
+                    <Route path="/create-new-trip" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <DynamicPanelDemo />
+                      </Suspense>
+                    } />
+                    <Route path="/create-quick-order" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <CreateQuickOrder />
+                      </Suspense>
+                    } />
+                  </Route>
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </TooltipProvider>
+          </QueryClientProvider>
+        </ReduxProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 };
