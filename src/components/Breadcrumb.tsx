@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ChevronRight, Home } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface BreadcrumbProps {
   items: Array<{
@@ -17,14 +18,21 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
         <div key={index} className='flex gap-2 items-center cursor-pointer'>
           {item.label === 'Home' && <Home size={16} className="me-1" />}
           {item.href ? (
-            <a
+            <>
+            {/* <a
               href={item.href}
               className={
                 item.active ? 'text-foreground' : 'text-blue-600 cursor-pointer'
               }
             >
               {item.label}
-            </a>
+            </a> */}
+            <Link to={item.href} className={
+              item.active ? 'text-foreground' : 'text-blue-600 cursor-pointer'
+            }>
+              {item.label}
+            </Link>
+              </>
           ) : (
             <span className="cursor-default text-foreground">{item.label}</span>
           )}

@@ -629,14 +629,15 @@ const QuickOrderManagement = () => {
       tooltipTitle: "Create new quick order",
       showDropdown: true, // Enable dropdown for future functionality
       onClick: () => {
-        navigate('/create-new-quick-order');
+        navigate('/create-quick-order');
       },
       dropdownItems: [
         {
           label: "Create Quick Order",
           icon: <Plus className="h-4 w-4" />,
           onClick: () => {
-            navigate('/create-new-quick-order');
+            navigate('/create-quick-order');
+            
           }
         },
         {

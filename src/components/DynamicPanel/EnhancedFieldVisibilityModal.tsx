@@ -216,7 +216,7 @@ export const EnhancedFieldVisibilityModal: React.FC<EnhancedFieldVisibilityModal
                 />
               </div>
               
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="panel-width">Panel Width</Label>
                 <Select value={currentWidth} onValueChange={(value: 'full' | 'half' | 'third' | 'quarter') => setCurrentWidth(value)}>
                   <SelectTrigger>
@@ -229,7 +229,7 @@ export const EnhancedFieldVisibilityModal: React.FC<EnhancedFieldVisibilityModal
                     <SelectItem value="quarter">Quarter (3 columns)</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
 
               <div className="flex items-center space-x-2">
                 <Checkbox

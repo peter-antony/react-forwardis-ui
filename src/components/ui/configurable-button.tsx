@@ -57,7 +57,11 @@ export const ConfigurableButton: React.FC<ConfigurableButtonProps> = ({
     if (hasDropdown) {
       setShowDropdown(!showDropdown);
     } else {
-      onClick?.();
+      if (config.onClick) {
+        config.onClick();
+      } else {
+        onClick?.();
+      }
     }
   };
 

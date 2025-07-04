@@ -27,6 +27,7 @@ export interface PanelSettings {
 export interface DynamicPanelProps {
   panelId: string;
   panelTitle: string;
+  panelIcon: React.ReactNode;
   panelConfig: PanelConfig;
   initialData?: Record<string, any>;
   onDataChange?: (updatedData: Record<string, any>) => void;

@@ -12,6 +12,7 @@ import { DynamicPanelProps, PanelConfig, PanelSettings } from '@/types/dynamicPa
 export const DynamicPanel: React.FC<DynamicPanelProps> = ({
   panelId,
   panelTitle: initialPanelTitle,
+  panelIcon: initialPanelIcon,
   panelConfig: initialPanelConfig,
   initialData = {},
   onDataChange,
@@ -27,10 +28,11 @@ export const DynamicPanel: React.FC<DynamicPanelProps> = ({
 }) => {
   const [panelConfig, setPanelConfig] = useState<PanelConfig>(initialPanelConfig);
   const [panelTitle, setPanelTitle] = useState(initialPanelTitle);
+  const [panelIcon, setPanelIcon] = useState(initialPanelIcon);
   const [currentPanelWidth, setCurrentPanelWidth] = useState<'full' | 'half' | 'third' | 'quarter' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12>(panelWidth);
   const [isCollapsible, setIsCollapsible] = useState(collapsible);
   const [panelVisible, setPanelVisible] = useState(true);
-  const [showStatusIndicator, setShowStatusIndicator] = useState(true);
+  const [showStatusIndicator, setShowStatusIndicator] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const [formData, setFormData] = useState(initialData);
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
@@ -53,7 +55,8 @@ export const DynamicPanel: React.FC<DynamicPanelProps> = ({
               setIsCollapsible(userSettings.collapsible);
             }
             if (userSettings.showStatusIndicator !== undefined) {
-              setShowStatusIndicator(userSettings.showStatusIndicator);
+              setShowStatusIndicator(false);
+              // setShowStatusIndicator(userSettings.showStatusIndicator);
             }
           }
         } catch (error) {
@@ -187,12 +190,12 @@ export const DynamicPanel: React.FC<DynamicPanelProps> = ({
   if (isCollapsible) {
     return (
       <Collapsible open={isOpen} onOpenChange={setIsOpen} className={`${getWidthClass()}`}>
-        <Card className="border border-gray-200 shadow-sm">
+        <Card className="border border-gray-200 shadow-sm mb-6">
           <CollapsibleTrigger asChild>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 px-4 pt-4 cursor-pointer hover:bg-gray-50">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 px-4 py-4 border-b mb-4 cursor-pointer hover:bg-gray-50">
               <div className="flex items-center gap-2">
-                <div className="w-5 h-5 border-2 border-purple-500 rounded"></div>
-                <CardTitle className="text-sm font-medium text-gray-700">{panelTitle}</CardTitle>
+                <div className="">{panelIcon}</div>
+                <CardTitle className="text-sm font-semibold text-gray-700">{panelTitle}</CardTitle>
                 <PanelStatusIndicator 
                   panelConfig={panelConfig}
                   formData={formData}
@@ -249,11 +252,11 @@ export const DynamicPanel: React.FC<DynamicPanelProps> = ({
   }
 
   return (
-    <Card className={`${getWidthClass()} border border-gray-200 shadow-sm`}>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 px-4 pt-4">
+    <Card className={`${getWidthClass()} border border-gray-200 shadow-sm mb-6`}>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 px-4 py-4 border-b mb-4">
         <div className="flex items-center gap-2">
-          <div className="w-5 h-5 border-2 border-purple-500 rounded"></div>
-          <CardTitle className="text-sm font-medium text-gray-700">{panelTitle}</CardTitle>
+          <div className="">{panelIcon}</div>
+          <CardTitle className="text-sm font-semibold text-gray-700">{panelTitle}</CardTitle>
           <PanelStatusIndicator 
             panelConfig={panelConfig}
             formData={formData}
