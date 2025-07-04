@@ -42,8 +42,11 @@ export function GridHeader<T>({
   };
 
   const getSortIcon = (columnKey: string) => {
-    if (preferences.sortBy !== columnKey) return null;
-    return preferences.sortDirection === 'asc' ? (
+    const sortBy = preferences.sortBy || preferences.sort?.column;
+    const sortDirection = preferences.sortDirection || preferences.sort?.direction;
+    
+    if (sortBy !== columnKey) return null;
+    return sortDirection === 'asc' ? (
       <ChevronUp className="w-4 h-4" />
     ) : (
       <ChevronDown className="w-4 h-4" />
@@ -66,7 +69,7 @@ export function GridHeader<T>({
         </th>
         {columns.map((column) => {
           const columnKey = String(column.key);
-          const currentTitle = preferences.columnTitles[columnKey] || column.title;
+          const currentTitle = (preferences.columnTitles && preferences.columnTitles[columnKey]) || column.title;
           
           return (
             <th
@@ -87,7 +90,9 @@ export function GridHeader<T>({
                     size="sm"
                     className="p-0 h-auto"
                     onClick={() => {
-                      const newDirection = preferences.sortBy === columnKey && preferences.sortDirection === 'asc' ? 'desc' : 'asc';
+                      const sortBy = preferences.sortBy || preferences.sort?.column;
+                      const sortDirection = preferences.sortDirection || preferences.sort?.direction;
+                      const newDirection = sortBy === columnKey && sortDirection === 'asc' ? 'desc' : 'asc';
                       onSort(columnKey, newDirection);
                     }}
                   >

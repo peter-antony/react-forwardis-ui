@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ConfigurableButtonConfig } from '@/components/ui/configurable-button';
 
@@ -24,6 +25,7 @@ export interface GridColumnConfig {
   order?: number;
   options?: string[];
   subRow?: boolean; // Property for sub-row display
+  width?: number;
   
   // Badge specific properties
   statusMap?: Record<string, string>;
@@ -39,6 +41,18 @@ export interface GridColumnConfig {
 }
 
 // Legacy interfaces for backward compatibility
+export interface GridColumn<T = any> {
+  key: keyof T | string;
+  title: string;
+  width?: number;
+  sortable?: boolean;
+  filterable?: boolean;
+  editable?: boolean;
+  type?: 'text' | 'number' | 'date' | 'boolean' | 'select';
+  options?: Array<{ label: string; value: any }>;
+  render?: (value: any, record: T, index: number) => React.ReactNode;
+}
+
 export interface Column<T = any> {
   id: string;
   header: string;
@@ -72,10 +86,13 @@ export interface GridPreferences {
   hiddenColumns: string[];
   columnWidths: Record<string, number>;
   columnHeaders: Record<string, string>;
+  columnTitles: Record<string, string>; // Added for backward compatibility
   subRowColumns: string[]; // Existing property for tracking sub-row columns
   subRowColumnOrder: string[]; // New property for sub-row column ordering
   enableSubRowConfig?: boolean; // New property for enabling/disabling sub-row configuration
   sort?: SortConfig;
+  sortBy?: string; // Added for backward compatibility
+  sortDirection?: 'asc' | 'desc'; // Added for backward compatibility
   filters: FilterConfig[];
   pageSize?: number;
 }
