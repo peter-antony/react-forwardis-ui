@@ -14,7 +14,7 @@ export interface ConfigurableButtonConfig {
   tooltipTitle: string;
   showDropdown: boolean;
   dropdownItems?: DropdownItem[];
-  onClick?: () => void; // Made optional to fix the missing prop error
+  onClick: () => void;
   tooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
 }
 
@@ -59,8 +59,8 @@ export const ConfigurableButton: React.FC<ConfigurableButtonProps> = ({
     } else {
       if (config.onClick) {
         config.onClick();
-      } else if (onClick) {
-        onClick();
+      } else {
+        onClick?.();
       }
     }
   };

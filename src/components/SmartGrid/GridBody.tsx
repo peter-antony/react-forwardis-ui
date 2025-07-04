@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { GridColumn } from '../../types/smartGrid';
 import { EditableCell } from './EditableCell';
@@ -34,8 +35,7 @@ export function GridBody<T>({
     const isEditing = editingCell?.row === rowKey && editingCell?.column === columnKey;
 
     if (column.render && !isEditing) {
-      // Fixed: Use only 2 arguments as expected by the render function
-      return column.render(value, record);
+      return column.render(value, record, rowIndex);
     }
 
     if (column.editable) {
