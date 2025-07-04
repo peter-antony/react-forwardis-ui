@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +14,7 @@ import QuickOrderManagement from "./pages/QuickOrderManagement";
 import DynamicPanelDemo from "./pages/CreateTripPlan";
 import TripPlansSearchHub from "./pages/TripPlansSearchHub";
 import CreateQuickOrder from "./pages/createQuickOrder";
+import { QueryProvider } from './providers/QueryProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,33 +35,29 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => {
-  console.log('🚀 App component initialized');
-
+function App() {
   return (
-    <ErrorBoundary>
-      <ThemeProvider>
-        <ReduxProvider>
-          <QueryClientProvider client={queryClient}>
-            <TooltipProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="" element={<QuickOrderManagement />} />
-                  <Route path={ROUTES.HOME} element={<QuickOrderManagement />} />
-                  <Route path="/quick-order" element={<QuickOrderManagement />} />
-                  <Route path="/trip-execution" element={<TripExecutionManagement />} />
-                  <Route path="/trip-plans-search-hub" element={<TripPlansSearchHub />} />
-                  <Route path="/create-new-trip" element={<DynamicPanelDemo />} />
-                  <Route path="/create-quick-order" element={<CreateQuickOrder />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </TooltipProvider>
-          </QueryClientProvider>
-        </ReduxProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
+    <QueryProvider>
+      <ReduxProvider>
+        <BrowserRouter>
+          <ThemeProvider>
+            <div className="min-h-screen bg-background">
+              <Routes>
+                <Route path="" element={<QuickOrderManagement />} />
+                <Route path={ROUTES.HOME} element={<QuickOrderManagement />} />
+                <Route path="/quick-order" element={<QuickOrderManagement />} />
+                <Route path="/trip-execution" element={<TripExecutionManagement />} />
+                <Route path="/trip-plans-search-hub" element={<TripPlansSearchHub />} />
+                <Route path="/create-new-trip" element={<DynamicPanelDemo />} />
+                <Route path="/create-quick-order" element={<CreateQuickOrder />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+          </ThemeProvider>
+        </BrowserRouter>
+      </ReduxProvider>
+    </QueryProvider>
   );
-};
+}
 
 export default App;
