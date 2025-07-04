@@ -1,37 +1,59 @@
-import React, { useState } from 'react';
-import { DynamicPanel } from '@/components/DynamicPanel';
-import { PanelVisibilityManager } from '@/components/DynamicPanel/PanelVisibilityManager';
-import { PanelConfig, PanelSettings } from '@/types/dynamicPanel';
-import { EyeOff } from 'lucide-react';
-import { Breadcrumb } from '@/components/Breadcrumb';
-import { AppLayout } from '@/components/AppLayout';
-import NewCreateQuickOrder from '@/components/QuickOrderNew/NewQuickOrder';
 
+import React from 'react';
+import { MainLayout } from '@/layouts/MainLayout';
+import { PageLayout } from '@/layouts/PageLayout';
+import { SplitLayout } from '@/components/layouts/SplitLayout';
+import OrderForm from '@/components/QuickOrderNew/OrderForm';
+import NewResourceGroup from '@/components/QuickOrderNew/NewResourceGroup';
+import { toast } from 'sonner';
 
 const CreateQuickOrder = () => {
-  //BreadCrumb data
   const breadcrumbItems = [
     { label: 'Home', href: '/dashboard', active: false },
     { label: 'Quick Order Management', href: '/quick-order', active: false },
     { label: 'Create Quick Order', active: true }
   ];
 
-  return (
-    <AppLayout> 
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto p-4 px-6 space-y-6">
-        <div className="hidden md:block">
-          <Breadcrumb items={breadcrumbItems} />
-        </div>
-        
-        <div className="">
-            <NewCreateQuickOrder />
-            
-        </div>
+  const handleSaveDraft = () => {
+    toast.success('Order saved as draft successfully!');
+    console.log('Save draft clicked');
+  };
 
-      </div>
-    </div>
-    </AppLayout>
+  const handleConfirm = () => {
+    toast.success('Order confirmed successfully!');
+    console.log('Confirm order clicked');
+  };
+
+  const handleCancel = () => {
+    toast.info('Order creation cancelled');
+    console.log('Cancel clicked');
+  };
+
+  const handleAddResource = () => {
+    console.log('Add resource group clicked');
+  };
+
+  return (
+    <MainLayout>
+      <PageLayout
+        breadcrumbs={breadcrumbItems}
+        title="Create Quick Order"
+      >
+        <SplitLayout
+          leftWidth="narrow"
+          left={
+            <OrderForm
+              onSaveDraft={handleSaveDraft}
+              onConfirm={handleConfirm}
+              onCancel={handleCancel}
+            />
+          }
+          right={
+            <NewResourceGroup onAddResource={handleAddResource} />
+          }
+        />
+      </PageLayout>
+    </MainLayout>
   );
 };
 
