@@ -43,13 +43,10 @@ export const useGridPreferences = <T>({
       columnOrder: columns.map(col => String(col.key)),
       columnWidths: {},
       columnTitles: {},
-      columnHeaders: {},
       hiddenColumns: [],
       sortBy: defaultSort?.column || '',
       sortDirection: defaultSort?.direction || 'asc',
-      filters: Object.entries(defaultFilters).map(([column, value]) => ({ column, value })),
-      subRowColumns: [],
-      subRowColumnOrder: [],
+      filters: defaultFilters,
       pageSize,
     };
   };
@@ -81,13 +78,10 @@ export const useGridPreferences = <T>({
       columnOrder: columns.map(col => String(col.key)),
       columnWidths: {},
       columnTitles: {},
-      columnHeaders: {},
       hiddenColumns: [],
       sortBy: defaultSort?.column || '',
       sortDirection: defaultSort?.direction || 'asc',
-      filters: Object.entries(defaultFilters).map(([column, value]) => ({ column, value })),
-      subRowColumns: [],
-      subRowColumnOrder: [],
+      filters: defaultFilters,
       pageSize,
     };
     

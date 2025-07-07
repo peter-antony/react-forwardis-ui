@@ -50,21 +50,14 @@ export const useGridData = <T extends Record<string, any>>({
     let result = [...data];
     
     // Apply filters
-    const filterObj = preferences.filters.reduce((acc, filter) => {
-      acc[filter.column] = filter.value;
-      return acc;
-    }, {} as Record<string, any>);
-    result = filterData(result, filterObj);
+    result = filterData(result, preferences.filters);
     
     // Apply sorting
-    const sortBy = preferences.sortBy || preferences.sort?.column;
-    const sortDirection = preferences.sortDirection || preferences.sort?.direction || 'asc';
-    result = sortData(result, sortBy || '', sortDirection);
+    result = sortData(result, preferences.sortBy, preferences.sortDirection);
     
     // Apply pagination
-    const pageSize = preferences.pageSize || 10;
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
+    const startIndex = (currentPage - 1) * preferences.pageSize;
+    const endIndex = startIndex + preferences.pageSize;
     const paginatedData = result.slice(startIndex, endIndex);
     
     return {

@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { SmartGrid } from '@/components/SmartGrid';
 import { GridColumnConfig } from '@/types/smartGrid';
 import { Button } from '@/components/ui/button';
-import { Printer, MoreHorizontal, User, Train, UserCheck, Container, Plus, Upload, Download } from 'lucide-react';
+import { Printer, MoreHorizontal, User, Train, UserCheck, Container, Plus, Upload } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSmartGridState } from '@/hooks/useSmartGridState';
 import { DraggableSubRow } from '@/components/SmartGrid/DraggableSubRow';
@@ -374,27 +374,31 @@ const GridDemo = () => {
   }, []);
 
   // Configurable buttons for the grid toolbar
-  const configurableButtons = [
+  const configurableButtons: ConfigurableButtonConfig[] = [
     {
-      label: 'Quick Actions',
-      tooltipTitle: 'Perform Quick Actions',
+      label: "+ Create button",
+      tooltipTitle: "Create button",
       showDropdown: false,
-      onClick: () => {},
       dropdownItems: [
         {
-          label: 'Create New',
+          label: "Create Trip",
           icon: <Plus className="h-4 w-4" />,
-          onClick: () => console.log('Create new item')
+          onClick: () => {
+            toast({
+              title: "Create Trip",
+              description: "Opening trip creation form..."
+            });
+          }
         },
         {
-          label: 'Import Data',
+          label: "Bulk Upload",
           icon: <Upload className="h-4 w-4" />,
-          onClick: () => console.log('Import data')
-        },
-        {
-          label: 'Export All',
-          icon: <Download className="h-4 w-4" />,
-          onClick: () => console.log('Export all data')
+          onClick: () => {
+            toast({
+              title: "Bulk Upload",
+              description: "Opening bulk upload dialog..."
+            });
+          }
         }
       ]
     }
