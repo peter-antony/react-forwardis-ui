@@ -5,7 +5,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ReduxProvider } from "./providers/ReduxProvider";
-import { ErrorBoundary } from "./components/molecules/ErrorBoundary/ErrorBoundary";
+import { ErrorBoundary } from "./components/ui/error-boundary";
+import { ThemeProvider } from "./components/ui/theme-provider";
+import { BaseLayout } from "./layouts/BaseLayout";
+import { AppSidebar } from "./components/AppSidebar";
+import { AppHeader } from "./components/AppHeader";
 import TripExecutionManagement from "./pages/TripExecutionManagement";
 import NotFound from "./pages/NotFound";
 import { ROUTES } from "./config/app.config";
@@ -39,28 +43,33 @@ const App = () => {
 
   return (
     <ErrorBoundary>
-      <ReduxProvider>
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="" element={<QuickOrderManagement />} />
-                <Route path={ROUTES.HOME} element={<QuickOrderManagement />} />
-                {/* <Route path={ROUTES.DASHBOARD} element={<Dashboard />} /> */}
-                <Route path="/quick-order" element={<QuickOrderManagement />} />
-                <Route path="/trip-execution" element={<TripExecutionManagement />} />
-                <Route path="/trip-plans-search-hub" element={<TripPlansSearchHub />} />
-                <Route path="/create-new-trip" element={<DynamicPanelDemo />} />
-                <Route path="/create-quick-order" element={<CreateQuickOrder />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </QueryClientProvider>
-      </ReduxProvider>
+      <ThemeProvider defaultTheme="light" storageKey="erp-theme">
+        <ReduxProvider>
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <BaseLayout 
+                  sidebar={<AppSidebar />}
+                  header={<AppHeader />}
+                >
+                  <Routes>
+                    <Route path="" element={<QuickOrderManagement />} />
+                    <Route path={ROUTES.HOME} element={<QuickOrderManagement />} />
+                    <Route path="/quick-order" element={<QuickOrderManagement />} />
+                    <Route path="/trip-execution" element={<TripExecutionManagement />} />
+                    <Route path="/trip-plans-search-hub" element={<TripPlansSearchHub />} />
+                    <Route path="/create-new-trip" element={<DynamicPanelDemo />} />
+                    <Route path="/create-quick-order" element={<CreateQuickOrder />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </BaseLayout>
+              </BrowserRouter>
+            </TooltipProvider>
+          </QueryClientProvider>
+        </ReduxProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 };
