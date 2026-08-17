@@ -68,7 +68,7 @@ export const DynamicPanel: React.FC<DynamicPanelProps> = ({
     loadUserConfig();
   }, [getUserPanelConfig, userId, panelId]);
 
-  // Get visible fields sorted by order
+  // Get visible fields sorted by order for dynamic panel 
   const visibleFields = Object.entries(panelConfig)
     .filter(([_, config]) => config.visible)
     .sort(([_, a], [__, b]) => a.order - b.order);
